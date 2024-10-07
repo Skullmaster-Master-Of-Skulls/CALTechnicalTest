@@ -3,4 +3,121 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Register with CAL</h1>
     <p>Please complete the form below and click the 'Submit' button when you are done. The 'Submit' button is located at the very bottom of this page.</p>
+
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Please correct the following errors:" CssClass="text-danger" />
+
+    <fieldset>
+        <legend>Personal Information</legend>
+        
+        <!-- First Name (Required; Text input) -->
+        <asp:Label AssociatedControlID="txtFirstName" Text="First Name (Required): " runat="server" />
+        <asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ControlToValidate="txtFirstName" ErrorMessage="First Name is required" CssClass="text-danger" />
+
+        <br />
+
+        <!-- Last Name (Required; Text input) -->
+        <asp:Label AssociatedControlID="txtLastName" Text="Last Name (Required): " runat="server" />
+        <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator ID="rfvLastName" runat="server" ControlToValidate="txtLastName" ErrorMessage="Last Name is required" CssClass="text-danger" />
+
+        <br />
+
+        <!-- Email (Required; Text email input) -->
+        <asp:Label AssociatedControlID="txtEmail" Text="Email (Required): " runat="server" />
+        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" />
+        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Email is required" CssClass="text-danger" />
+        <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" ErrorMessage="Invalid email format" CssClass="text-danger" />
+
+        <br />
+
+        <!-- Preferred Pronouns (Dropdown list or radio buttons) -->
+        <asp:Label Text="Preferred Pronouns: " runat="server" />
+        <asp:DropDownList ID="ddlPronouns" runat="server">
+            <asp:ListItem Text="Select..." Value="" />
+            <asp:ListItem Text="He/Him" Value="He/Him" />
+            <asp:ListItem Text="She/Her" Value="She/Her" />
+            <asp:ListItem Text="They/Them" Value="They/Them" />
+            <asp:ListItem Text="Other" Value="Other" />
+        </asp:DropDownList>
+
+        <br /> <br />
+
+        <!-- Level of Study (Required; Dropdown list or radio buttons) -->
+        <asp:Label Text="Level of Study (Required): " runat="server" />
+        <asp:RadioButtonList ID="rblLevelOfStudy" runat="server">
+            <asp:ListItem Text="High school graduate" Value="HighSchoolGraduate" />
+            <asp:ListItem Text="Undergraduate" Value="Undergraduate" />
+            <asp:ListItem Text="Graduate" Value="Graduate" />
+        </asp:RadioButtonList>
+        <asp:RequiredFieldValidator ID="rfvLevelOfStudy" runat="server" ControlToValidate="rblLevelOfStudy" InitialValue="" ErrorMessage="Please select a level of study" CssClass="text-danger" />
+
+        <br />
+
+        <!-- International Student Status (Required; Yes or No; radio buttons) -->
+        <asp:Label Text="International Student Status (Required): " runat="server" />
+        <asp:RadioButtonList ID="rblInternationalStatus" runat="server">
+            <asp:ListItem Text="Yes" Value="Yes" />
+            <asp:ListItem Text="No" Value="No" />
+        </asp:RadioButtonList>
+        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select International Student Status" CssClass="text-danger" />
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Disability Information</legend>
+
+        <!-- Disability Type (Required; Dropdown list as a multi-select or checkbox buttons) -->
+        <asp:Label Text="Disability Type (Required): " runat="server" />
+        <asp:CheckBoxList ID="cblDisabilityType" runat="server">
+            <asp:ListItem Text="ADHD" Value="ADHD" />
+            <asp:ListItem Text="Autism" Value="Autism" />
+            <asp:ListItem Text="Chronic illness" Value="Chronic illness" />
+            <asp:ListItem Text="Deaf or hard of hearing" Value="Deaf or hard of hearing" />
+            <asp:ListItem Text="Learning disability" Value="Learning disability" />
+            <asp:ListItem Text="Mental health" Value="Mental health" />
+            <asp:ListItem Text="Neurological" Value="Neurological" />
+            <asp:ListItem Text="Physical or mobility" Value="Physical or mobility" />
+            <asp:ListItem Text="Vision" Value="Vision" />
+            <asp:ListItem Text="Other" Value="Other" />
+        </asp:CheckBoxList>
+
+        <asp:CustomValidator ID="cvDisabilityType" runat="server" 
+            ErrorMessage="Please select at least one disability type" 
+            OnServerValidate="cvDisabilityType_ServerValidate" 
+            CssClass="text-danger" />
+        <br />
+
+
+
+        <!-- Additional Accessibility Requirements (Multiline Text Area) -->
+        <asp:Label AssociatedControlID="txtAccessibilityReq" Text="Additional Accessibility Requirements:" runat="server" />
+        <asp:TextBox ID="txtAccessibilityReq" runat="server" TextMode="MultiLine" Rows="5" CssClass="form-control" />
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Consent</legend>
+
+        <!-- Consent Information (Text paragraph) -->
+        <p>By submitting this form, you consent to the collection and processing of the provided information in accordance with our privacy policy.</p>
+
+        <!-- Full Name (Text input) -->
+        <asp:Label AssociatedControlID="txtConsentFullName" Text="Full Name (Required):" runat="server" />
+        <asp:TextBox ID="txtConsentFullName" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator ID="rfvConsentFullName" runat="server" ControlToValidate="txtConsentFullName" ErrorMessage="Full name is required" CssClass="text-danger" />
+
+        <br />
+
+        <!-- Confirm Full Name (Text input) -->
+        <asp:Label AssociatedControlID="txtConfirmConsentFullName" Text="Confirm Full Name (Required):" runat="server" />
+        <asp:TextBox ID="txtConfirmConsentFullName" runat="server" CssClass="form-control" />
+        <asp:RequiredFieldValidator ID="rfvConfirmConsentFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ErrorMessage="Please confirm your full name" CssClass="text-danger" />
+        <asp:CompareValidator ID="cvConfirmFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ControlToCompare="txtConsentFullName" ErrorMessage="Full names do not match" CssClass="text-danger" />
+
+    </fieldset>
+
+    <!-- Submit Button -->
+    <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
+    
 </asp:Content>
