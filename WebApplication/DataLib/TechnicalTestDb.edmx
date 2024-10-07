@@ -21,6 +21,7 @@
           <Property Name="AdditionalAccessibilityRequirements" Type="nvarchar(max)" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LevelOfStudy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SubmissionDisability">
           <Key>
@@ -97,6 +98,7 @@
           <NavigationProperty Name="DisabilityTypes" Relationship="TechnicalTestDbModel.SubmissionDisability" FromRole="FormSubmission" ToRole="DisabilityType" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LevelOfStudy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="SubmissionDisability">
           <End Type="TechnicalTestDbModel.DisabilityType" Role="DisabilityType" Multiplicity="*" />
@@ -119,6 +121,7 @@
           <EntitySetMapping Name="FormSubmissions">
             <EntityTypeMapping TypeName="TechnicalTestDbModel.FormSubmission">
               <MappingFragment StoreEntitySet="FormSubmissions">
+                <ScalarProperty Name="LevelOfStudy" ColumnName="LevelOfStudy" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="AdditionalAccessibilityRequirements" ColumnName="AdditionalAccessibilityRequirements" />

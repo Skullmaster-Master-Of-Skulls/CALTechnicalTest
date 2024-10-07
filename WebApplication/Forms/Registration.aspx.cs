@@ -29,6 +29,7 @@ namespace WebApplication.Forms
                 string lastName = txtLastName.Text.Trim();
                 string email = txtEmail.Text;
                 string additionalAccessibilityReq = txtAccessibilityReq.Text;
+                string levelOfStudy = rblLevelOfStudy.SelectedValue;
 
                 List<int> selectedDisabilityTypeIds = cblDisabilityType.Items.Cast<ListItem>()
                     .Where(item => item.Selected)
@@ -47,6 +48,7 @@ namespace WebApplication.Forms
                         FirstName = firstName,  
                         LastName = lastName,    
                         Email = email,
+                        LevelOfStudy = levelOfStudy,
                         AdditionalAccessibilityRequirements = additionalAccessibilityReq
                     };
 
