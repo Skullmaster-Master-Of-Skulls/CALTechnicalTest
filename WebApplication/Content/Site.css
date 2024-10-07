@@ -5,6 +5,21 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.small-dropdown {
+    width: 200px; /* Adjust the width as needed */
+}
+input[type="radio"] {
+    margin-right: 5px;
+    display: inline-block;
+}
+input[type="checkbox"] {
+    margin-right: 5px;
+    display: inline-block;
+}
+label {
+    display: inline-block; 
+}
+
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 /*input,
@@ -18,4 +33,20 @@ textarea {
     .body-content {
         padding: 0;
     }
+    .small-dropdown {
+        width: 20%; /* Adjust the width as needed */
+    }
+    input[type="checkbox"] {
+        margin-right: 1%;
+    }
+
+    input[type="radio"] {
+        margin-right: 1%;
+    }
+
+    button, input[type="submit"], input[type="button"] {
+        padding: 0.5% 1%;
+        margin-right: 1%;
+    }
+
 }
