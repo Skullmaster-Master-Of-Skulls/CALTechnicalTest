@@ -4,20 +4,137 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TechnicalTestDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="TechnicalTestDbModelStoreContainer" />
+    <Schema Namespace="TechnicalTestDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DisabilityType">
+          <Key>
+            <PropertyRef Name="DisabilityTypeId" />
+          </Key>
+          <Property Name="DisabilityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisabilityName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormSubmissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdditionalAccessibilityRequirements" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubmissionDisability">
+          <Key>
+            <PropertyRef Name="FormSubmissionId" />
+            <PropertyRef Name="DisabilityTypeId" />
+          </Key>
+          <Property Name="FormSubmissionId" Type="int" Nullable="false" />
+          <Property Name="DisabilityTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Submissio__Disab__2E1BDC42">
+          <End Role="DisabilityType" Type="Self.DisabilityType" Multiplicity="1" />
+          <End Role="SubmissionDisability" Type="Self.SubmissionDisability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisabilityType">
+              <PropertyRef Name="DisabilityTypeId" />
+            </Principal>
+            <Dependent Role="SubmissionDisability">
+              <PropertyRef Name="DisabilityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Submissio__FormS__2D27B809">
+          <End Role="FormSubmissions" Type="Self.FormSubmissions" Multiplicity="1" />
+          <End Role="SubmissionDisability" Type="Self.SubmissionDisability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormSubmissions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubmissionDisability">
+              <PropertyRef Name="FormSubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechnicalTestDbModelStoreContainer">
+          <EntitySet Name="DisabilityType" EntityType="Self.DisabilityType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormSubmissions" EntityType="Self.FormSubmissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubmissionDisability" EntityType="Self.SubmissionDisability" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Submissio__Disab__2E1BDC42" Association="Self.FK__Submissio__Disab__2E1BDC42">
+            <End Role="DisabilityType" EntitySet="DisabilityType" />
+            <End Role="SubmissionDisability" EntitySet="SubmissionDisability" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Submissio__FormS__2D27B809" Association="Self.FK__Submissio__FormS__2D27B809">
+            <End Role="FormSubmissions" EntitySet="FormSubmissions" />
+            <End Role="SubmissionDisability" EntitySet="SubmissionDisability" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TechnicalTestDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TechnicalTestDbEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="DisabilityTypes" EntityType="TechnicalTestDbModel.DisabilityType" />
+          <EntitySet Name="FormSubmissions" EntityType="TechnicalTestDbModel.FormSubmission" />
+          <AssociationSet Name="SubmissionDisability" Association="TechnicalTestDbModel.SubmissionDisability">
+            <End Role="DisabilityType" EntitySet="DisabilityTypes" />
+            <End Role="FormSubmission" EntitySet="FormSubmissions" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DisabilityType">
+          <Key>
+            <PropertyRef Name="DisabilityTypeId" />
+          </Key>
+          <Property Name="DisabilityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisabilityName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FormSubmissions" Relationship="TechnicalTestDbModel.SubmissionDisability" FromRole="DisabilityType" ToRole="FormSubmission" />
+        </EntityType>
+        <EntityType Name="FormSubmission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalAccessibilityRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DisabilityTypes" Relationship="TechnicalTestDbModel.SubmissionDisability" FromRole="FormSubmission" ToRole="DisabilityType" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="SubmissionDisability">
+          <End Type="TechnicalTestDbModel.DisabilityType" Role="DisabilityType" Multiplicity="*" />
+          <End Type="TechnicalTestDbModel.FormSubmission" Role="FormSubmission" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TechnicalTestDbModelStoreContainer" CdmEntityContainer="TechnicalTestDbEntities" >
+          <EntitySetMapping Name="DisabilityTypes">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.DisabilityType">
+              <MappingFragment StoreEntitySet="DisabilityType">
+                <ScalarProperty Name="DisabilityName" ColumnName="DisabilityName" />
+                <ScalarProperty Name="DisabilityTypeId" ColumnName="DisabilityTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormSubmissions">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.FormSubmission">
+              <MappingFragment StoreEntitySet="FormSubmissions">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AdditionalAccessibilityRequirements" ColumnName="AdditionalAccessibilityRequirements" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SubmissionDisability" TypeName="TechnicalTestDbModel.SubmissionDisability" StoreEntitySet="SubmissionDisability">
+            <EndProperty Name="FormSubmission">
+              <ScalarProperty Name="Id" ColumnName="FormSubmissionId" />
+            </EndProperty>
+            <EndProperty Name="DisabilityType">
+              <ScalarProperty Name="DisabilityTypeId" ColumnName="DisabilityTypeId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -25,5 +25,7 @@ namespace WebApplication.DataLib
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DisabilityType> DisabilityTypes { get; set; }
+        public virtual DbSet<FormSubmission> FormSubmissions { get; set; }
     }
 }

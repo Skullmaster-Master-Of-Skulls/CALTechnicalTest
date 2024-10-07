@@ -313,6 +313,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="DataLib\DisabilityType.cs">
+      <DependentUpon>TechnicalTestDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLib\FormSubmission.cs">
+      <DependentUpon>TechnicalTestDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataLib\TechnicalTestDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
