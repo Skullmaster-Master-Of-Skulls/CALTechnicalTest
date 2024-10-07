@@ -68,19 +68,19 @@
         <legend>Disability Information</legend>
 
         <!-- Disability Type (Required; Dropdown list as a multi-select or checkbox buttons) -->
-        <asp:Label Text="Disability Type (Required): " runat="server" />
         <asp:CheckBoxList ID="cblDisabilityType" runat="server">
-            <asp:ListItem Text="ADHD" Value="ADHD" />
-            <asp:ListItem Text="Autism" Value="Autism" />
-            <asp:ListItem Text="Chronic illness" Value="Chronic illness" />
-            <asp:ListItem Text="Deaf or hard of hearing" Value="Deaf or hard of hearing" />
-            <asp:ListItem Text="Learning disability" Value="Learning disability" />
-            <asp:ListItem Text="Mental health" Value="Mental health" />
-            <asp:ListItem Text="Neurological" Value="Neurological" />
-            <asp:ListItem Text="Physical or mobility" Value="Physical or mobility" />
-            <asp:ListItem Text="Vision" Value="Vision" />
-            <asp:ListItem Text="Other" Value="Other" />
+            <asp:ListItem Text="ADHD" Value="1" />
+            <asp:ListItem Text="Autism" Value="2" />
+            <asp:ListItem Text="Chronic illness" Value="3" />
+            <asp:ListItem Text="Deaf or hard of hearing" Value="4" />
+            <asp:ListItem Text="Learning disability" Value="5" />
+            <asp:ListItem Text="Mental health" Value="6" />
+            <asp:ListItem Text="Neurological" Value="7" />
+            <asp:ListItem Text="Physical or mobility" Value="8" />
+            <asp:ListItem Text="Vision" Value="9" />
+            <asp:ListItem Text="Other" Value="10" />
         </asp:CheckBoxList>
+
 
         <asp:CustomValidator ID="cvDisabilityType" runat="server" 
             ErrorMessage="Please select at least one disability type" 

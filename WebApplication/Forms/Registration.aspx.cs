@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication.DataLib;
 
 namespace WebApplication.Forms
 {
@@ -13,9 +14,10 @@ namespace WebApplication.Forms
         {
 
         }
+
+        //Checks to see if at least one checkbox is selected. Should there be a text field that pops up if Other is selected?
         protected void cvDisabilityType_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            // Check if at least one checkbox is selected
             args.IsValid = cblDisabilityType.Items.Cast<ListItem>().Any(item => item.Selected);
         }
 
@@ -23,35 +25,45 @@ namespace WebApplication.Forms
         {
             if (Page.IsValid)
             {
-                // Collect data from form controls
-                string firstName = txtFirstName.Text;
-                string lastName = txtLastName.Text;
+                string firstName = txtFirstName.Text.Trim();
+                string lastName = txtLastName.Text.Trim();
                 string email = txtEmail.Text;
-                string preferredPronouns = ddlPronouns.SelectedValue;
-                string levelOfStudy = rblLevelOfStudy.SelectedValue;
-                string internationalStatus = rblInternationalStatus.SelectedValue;
-
-                // Collect multi-selection checkbox values
-                List<string> disabilityTypes = new List<string>();
-                foreach (ListItem item in cblDisabilityType.Items)
-                {
-                    if (item.Selected)
-                    {
-                        disabilityTypes.Add(item.Value);
-                    }
-                }
-
                 string additionalAccessibilityReq = txtAccessibilityReq.Text;
-                string consentFullName = txtConsentFullName.Text;
-                string confirmFullName = txtConfirmConsentFullName.Text;
 
-                // Perform database save or further processing here...
+                List<int> selectedDisabilityTypeIds = cblDisabilityType.Items.Cast<ListItem>()
+                    .Where(item => item.Selected)
+                    .Select(item =>
+                    {
+                        int value;
+                        return int.TryParse(item.Value, out value) ? value : -1; 
+                    })
+                    .Where(value => value != -1) // Filter out invalid values
+                    .ToList();
 
-                // Redirect or display success message
-                Response.Redirect("Success.aspx");
+                using (var context = new TechnicalTestDbEntities())
+                {
+                    var submission = new FormSubmission
+                    {
+                        FirstName = firstName,  
+                        LastName = lastName,    
+                        Email = email,
+                        AdditionalAccessibilityRequirements = additionalAccessibilityReq
+                    };
+
+                    foreach (var disabilityTypeId in selectedDisabilityTypeIds)
+                    {
+                        var disabilityType = context.DisabilityTypes.Find(disabilityTypeId);
+                        if (disabilityType != null)
+                        {
+                            submission.DisabilityTypes.Add(disabilityType);
+                        }
+                    }
+
+                    context.FormSubmissions.Add(submission);
+                    context.SaveChanges(); 
+                }
             }
         }
-
 
     }
 }
