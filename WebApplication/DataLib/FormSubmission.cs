@@ -26,6 +26,9 @@ namespace WebApplication.DataLib
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string LevelOfStudy { get; set; }
+        public string PreferredPronoun { get; set; }
+        public bool International { get; set; }
+        public bool Consent { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DisabilityType> DisabilityTypes { get; set; }

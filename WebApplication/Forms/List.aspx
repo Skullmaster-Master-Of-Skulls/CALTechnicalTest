@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Submissions</h1>
     <div class="table-responsive">
-        <asp:GridView ID="gvSubmissions" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-striped">
+        <asp:GridView ID="gvSubmissions" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-striped" OnRowCommand="gvSubmissions_RowCommand">
             <Columns>
 
                 <asp:BoundField DataField="FirstName" HeaderText="First Name" />
@@ -29,6 +29,7 @@
                                     aria-label='<%# "View details for " + Eval("FirstName") + " " + Eval("LastName") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>
+
             </Columns>
         </asp:GridView>
 

@@ -33,12 +33,11 @@
 
         <!-- Preferred Pronouns (Dropdown list or radio buttons) -->
         <asp:Label Text="Preferred Pronouns: " runat="server" />
-        <asp:DropDownList ID="ddlPronouns" runat="server">
-            <asp:ListItem Text="Select..." Value="" />
-            <asp:ListItem Text="He/Him" Value="He/Him" />
-            <asp:ListItem Text="She/Her" Value="She/Her" />
-            <asp:ListItem Text="They/Them" Value="They/Them" />
-            <asp:ListItem Text="Other" Value="Other" />
+        <asp:DropDownList ID="ddlPreferredPronoun" runat="server">
+            <asp:ListItem Text="He/Him" Value="He/Him"></asp:ListItem>
+            <asp:ListItem Text="She/Her" Value="She/Her"></asp:ListItem>
+            <asp:ListItem Text="They/Them" Value="They/Them"></asp:ListItem>
+            <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
         </asp:DropDownList>
 
         <br /> <br />
@@ -57,10 +56,15 @@
         <!-- International Student Status (Required; Yes or No; radio buttons) -->
         <asp:Label Text="International Student Status (Required): " runat="server" />
         <asp:RadioButtonList ID="rblInternationalStatus" runat="server">
-            <asp:ListItem Text="Yes" Value="Yes" />
-            <asp:ListItem Text="No" Value="No" />
+            <asp:ListItem Text="Yes" Value="true"></asp:ListItem>
+            <asp:ListItem Text="No" Value="false"></asp:ListItem>
         </asp:RadioButtonList>
-        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select International Student Status" CssClass="text-danger" />
+
+        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server"
+            ControlToValidate="rblInternationalStatus"
+            InitialValue=""
+            ErrorMessage="Please select your international status."
+            CssClass="text-danger" />
 
     </fieldset>
 
@@ -114,7 +118,9 @@
         <asp:TextBox ID="txtConfirmConsentFullName" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvConfirmConsentFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ErrorMessage="Please confirm your full name" CssClass="text-danger" />
         <asp:CompareValidator ID="cvConfirmFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ControlToCompare="txtConsentFullName" ErrorMessage="Full names do not match" CssClass="text-danger" />
-
+        
+        <asp:CustomValidator ID="cvCheckFullName" runat="server" ControlToValidate="txtConsentFullName" 
+            OnServerValidate="ValidateFullNameMatch" ErrorMessage="The entered full name must match your first and last name." CssClass="text-danger" />
     </fieldset>
 
     <!-- Submit Button -->

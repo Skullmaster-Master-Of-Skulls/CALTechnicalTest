@@ -22,6 +22,9 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LevelOfStudy" Type="nvarchar" MaxLength="50" />
+          <Property Name="PreferredPronoun" Type="varchar" MaxLength="50" />
+          <Property Name="International" Type="bit" Nullable="false" />
+          <Property Name="Consent" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SubmissionDisability">
           <Key>
@@ -99,6 +102,9 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LevelOfStudy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredPronoun" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="International" Type="Boolean" Nullable="false" />
+          <Property Name="Consent" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="SubmissionDisability">
           <End Type="TechnicalTestDbModel.DisabilityType" Role="DisabilityType" Multiplicity="*" />
@@ -121,6 +127,9 @@
           <EntitySetMapping Name="FormSubmissions">
             <EntityTypeMapping TypeName="TechnicalTestDbModel.FormSubmission">
               <MappingFragment StoreEntitySet="FormSubmissions">
+                <ScalarProperty Name="Consent" ColumnName="Consent" />
+                <ScalarProperty Name="International" ColumnName="International" />
+                <ScalarProperty Name="PreferredPronoun" ColumnName="PreferredPronoun" />
                 <ScalarProperty Name="LevelOfStudy" ColumnName="LevelOfStudy" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

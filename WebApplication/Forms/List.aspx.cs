@@ -57,11 +57,14 @@ namespace WebApplication.Forms
         {
             if (e.CommandName == "View")
             {
+                // Get the submission ID from the CommandArgument
                 int submissionId = Convert.ToInt32(e.CommandArgument);
 
-                Response.Redirect($"ViewSubmission.aspx?id={submissionId}");
+                // Redirect to the registration page with the submission ID in the query string
+                Response.Redirect($"Registration.aspx?id={submissionId}");
             }
         }
+
         private string SplitCamelCase(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
