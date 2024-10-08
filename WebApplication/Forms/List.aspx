@@ -6,21 +6,53 @@
         <asp:GridView ID="gvSubmissions" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" CssClass="table table-striped" OnRowCommand="gvSubmissions_RowCommand">
             <Columns>
 
-                <asp:BoundField DataField="FirstName" HeaderText="First Name" />
-
-                <asp:BoundField DataField="LastName" HeaderText="Last Name" />
-
-                <asp:BoundField DataField="Email" HeaderText="Email" />
-
-                <asp:BoundField DataField="LevelOfStudyDisplay" HeaderText="Level of Study" />
-
-                <asp:TemplateField HeaderText="Disability Type">
+                <asp:TemplateField HeaderText="First Name">
                     <ItemTemplate>
-                        <asp:Label ID="lblDisabilityTypes" runat="server" Text='<%# Eval("DisabilityTypesDisplay") %>'></asp:Label>
+                        <span aria-label='<%# "First Name: " + Eval("FirstName") %>'>
+                            <%# Eval("FirstName") %>
+                        </span>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:BoundField DataField="AdditionalAccessibilityRequirements" HeaderText="Additional Requirements" />
+                <asp:TemplateField HeaderText="Last Name">
+                    <ItemTemplate>
+                        <span aria-label='<%# "Last Name: " + Eval("LastName") %>'>
+                            <%# Eval("LastName") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <span aria-label='<%# "Email: " + Eval("Email") %>'>
+                            <%# Eval("Email") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Level of Study">
+                    <ItemTemplate>
+                        <span aria-label='<%# "Level of Study: " + Eval("LevelOfStudyDisplay") %>'>
+                            <%# Eval("LevelOfStudyDisplay") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Disability Type">
+                    <ItemTemplate>
+                        <span aria-label='<%# "Disability type: " + Eval("DisabilityTypesDisplay") %>'>
+                            <%# Eval("DisabilityTypesDisplay") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Additional Requirements">
+                    <ItemTemplate>
+                        <span aria-label='<%# "Additional Accessibility Requirements: " + Eval("AdditionalAccessibilityRequirements") %>'>
+                            <%# Eval("AdditionalAccessibilityRequirements") %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Action">
                     <ItemTemplate>
@@ -32,8 +64,8 @@
 
             </Columns>
         </asp:GridView>
-
-
     </div>
+
+
 
 </asp:Content>
