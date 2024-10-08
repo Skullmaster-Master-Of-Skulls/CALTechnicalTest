@@ -73,33 +73,38 @@ namespace WebApplication.Forms
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if (!Page.IsValid)
             {
-                int submissionId;
-
-                using (var context = new TechnicalTestDbEntities())
-                {
-                    FormSubmission submission;
-
-                    //Existing submission
-                    if (int.TryParse(Request.QueryString["id"], out submissionId))
-                    {
-
-                        submission = context.FormSubmissions.FirstOrDefault(s => s.Id == submissionId);
-                    }
-                    //Create new submission
-                    else
-                    {
-                        submission = new FormSubmission();
-                        context.FormSubmissions.Add(submission);
-                    }
-
-                    PopulateSubmissionData(submission, context);
-
-                    context.SaveChanges();
-                }
-                Response.Redirect("List.aspx");
+                // If the page is invalid, register a client-side script to focus the ValidationSummary
+                ScriptManager.RegisterStartupScript(this, GetType(), "focusValidationSummary", "focusValidationSummary();", true);
+                return;
             }
+            
+            int submissionId;
+
+            using (var context = new TechnicalTestDbEntities())
+            {
+                FormSubmission submission;
+
+                //Existing submission
+                if (int.TryParse(Request.QueryString["id"], out submissionId))
+                {
+
+                    submission = context.FormSubmissions.FirstOrDefault(s => s.Id == submissionId);
+                }
+                //Create new submission
+                else
+                {
+                    submission = new FormSubmission();
+                    context.FormSubmissions.Add(submission);
+                }
+
+                PopulateSubmissionData(submission, context);
+
+                context.SaveChanges();
+            }
+            Response.Redirect("List.aspx");
+            
         }
 
         protected void PopulateSubmissionData(FormSubmission submission, TechnicalTestDbEntities context)

@@ -4,7 +4,7 @@
     <h1>Register with CAL</h1>
     <p>Please complete the form below and click the 'Submit' button when you are done. The 'Submit' button is located at the very bottom of this page.</p>
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Please correct the following errors:" CssClass="text-danger" />
+    <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Please correct the following errors:" CssClass="text-danger" aria-live="assertive" />
 
     <fieldset>
         <legend>Personal Information</legend>
@@ -125,5 +125,22 @@
 
     <!-- Submit Button -->
     <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
-    
+
+    <script type="text/javascript">
+        <script type="text/javascript">
+            function focusValidationSummary() {
+        var validationSummary = document.getElementById('<%= ValidationSummary1.ClientID %>');
+        if (validationSummary && validationSummary.innerHTML.trim() !== "") {
+            validationSummary.setAttribute("tabindex", "-1");
+        validationSummary.focus();
+
+        validationSummary.setAttribute("aria-live", "off");
+        setTimeout(function() {
+            validationSummary.setAttribute("aria-live", "assertive");
+            }, 100);  
+        }
+    }
+    </script>
+
+
 </asp:Content>
