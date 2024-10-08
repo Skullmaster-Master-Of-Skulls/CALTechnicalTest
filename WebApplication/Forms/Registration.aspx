@@ -62,7 +62,7 @@
                 <asp:ListItem Text="International Student" Value="true" />
                 <asp:ListItem Text="Domestic Student" Value="false" />
             </asp:RadioButtonList>
-            <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select your international status." CssClass="text-danger" />
+            <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select your international student status." CssClass="text-danger" />
         </fieldset>
 
         <br />
