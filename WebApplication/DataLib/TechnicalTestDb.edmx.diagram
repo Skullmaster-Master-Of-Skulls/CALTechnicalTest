@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f43d2bff0ad8404689c827251e9d5e1f" Name="Diagram1" >
         <EntityTypeShape EntityType="TechnicalTestDbModel.DisabilityType" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TechnicalTestDbModel.FormSubmission" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TechnicalTestDbModel.FormSubmission" Width="2.625" PointX="2.75" PointY="0.75" />
         <AssociationConnector Association="TechnicalTestDbModel.SubmissionDisability" />
       </Diagram>
     </edmx:Diagrams>

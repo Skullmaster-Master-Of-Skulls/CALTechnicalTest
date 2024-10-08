@@ -32,35 +32,46 @@
         <br />
 
         <!-- Preferred Pronouns (Dropdown list or radio buttons) -->
-        <asp:Label Text="Preferred Pronouns: " runat="server" />
-        <asp:DropDownList ID="ddlPronouns" runat="server">
-            <asp:ListItem Text="Select..." Value="" />
-            <asp:ListItem Text="He/Him" Value="He/Him" />
-            <asp:ListItem Text="She/Her" Value="She/Her" />
-            <asp:ListItem Text="They/Them" Value="They/Them" />
-            <asp:ListItem Text="Other" Value="Other" />
+        <asp:Label AssociatedControlID="ddlPreferredPronoun" Text="Preferred Pronouns: " runat="server" />
+        <asp:DropDownList ID="ddlPreferredPronoun" runat="server" CssClass="small-dropdown">
+            <asp:ListItem Text="He/Him" Value="He/Him"></asp:ListItem>
+            <asp:ListItem Text="She/Her" Value="She/Her"></asp:ListItem>
+            <asp:ListItem Text="They/Them" Value="They/Them"></asp:ListItem>
+            <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
         </asp:DropDownList>
+
 
         <br /> <br />
 
         <!-- Level of Study (Required; Dropdown list or radio buttons) -->
-        <asp:Label Text="Level of Study (Required): " runat="server" />
-        <asp:RadioButtonList ID="rblLevelOfStudy" runat="server">
-            <asp:ListItem Text="High school graduate" Value="HighSchoolGraduate" />
-            <asp:ListItem Text="Undergraduate" Value="Undergraduate" />
-            <asp:ListItem Text="Graduate" Value="Graduate" />
-        </asp:RadioButtonList>
-        <asp:RequiredFieldValidator ID="rfvLevelOfStudy" runat="server" ControlToValidate="rblLevelOfStudy" InitialValue="" ErrorMessage="Please select a level of study" CssClass="text-danger" />
+        <asp:Label ID="lblLevelOfStudy" AssociatedControlID="rblLevelOfStudy" Text="Level of Study (Required):" runat="server" />
+        <br />
+        <div>
+             <asp:RadioButtonList ID="rblLevelOfStudy" runat="server" RepeatDirection="Vertical" aria-labelledby="lblLevelOfStudy" RepeatLayout="Flow" >
+                <asp:ListItem Text="High school graduate" Value="HighSchoolGraduate" />
+                <asp:ListItem Text="Undergraduate" Value="Undergraduate" />
+                <asp:ListItem Text="Graduate" Value="Graduate" />
+             </asp:RadioButtonList>
+
+             <asp:RequiredFieldValidator ID="rfvLevelOfStudy" runat="server" ControlToValidate="rblLevelOfStudy" InitialValue=""  ErrorMessage="Please select a level of study" CssClass="text-danger" />
+        </div>
+       
 
         <br />
 
         <!-- International Student Status (Required; Yes or No; radio buttons) -->
         <asp:Label Text="International Student Status (Required): " runat="server" />
-        <asp:RadioButtonList ID="rblInternationalStatus" runat="server">
-            <asp:ListItem Text="Yes" Value="Yes" />
-            <asp:ListItem Text="No" Value="No" />
+        <br />
+        <asp:RadioButtonList ID="rblInternationalStatus" runat="server" RepeatLayout="Flow">
+            <asp:ListItem Text="Yes" Value="true"></asp:ListItem>
+            <asp:ListItem Text="No" Value="false"></asp:ListItem>
         </asp:RadioButtonList>
-        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select International Student Status" CssClass="text-danger" />
+
+        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server"
+            ControlToValidate="rblInternationalStatus"
+            InitialValue=""
+            ErrorMessage="Please select your international status."
+            CssClass="text-danger" />
 
     </fieldset>
 
@@ -68,7 +79,7 @@
         <legend>Disability Information</legend>
 
         <!-- Disability Type (Required; Dropdown list as a multi-select or checkbox buttons) -->
-        <asp:CheckBoxList ID="cblDisabilityType" runat="server">
+        <asp:CheckBoxList ID="cblDisabilityType" runat="server" RepeatLayout="Flow">
             <asp:ListItem Text="ADHD" Value="1" />
             <asp:ListItem Text="Autism" Value="2" />
             <asp:ListItem Text="Chronic illness" Value="3" />
@@ -86,7 +97,7 @@
             ErrorMessage="Please select at least one disability type" 
             OnServerValidate="cvDisabilityType_ServerValidate" 
             CssClass="text-danger" />
-        <br />
+        <br /><br />
 
 
 
@@ -114,7 +125,9 @@
         <asp:TextBox ID="txtConfirmConsentFullName" runat="server" CssClass="form-control" />
         <asp:RequiredFieldValidator ID="rfvConfirmConsentFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ErrorMessage="Please confirm your full name" CssClass="text-danger" />
         <asp:CompareValidator ID="cvConfirmFullName" runat="server" ControlToValidate="txtConfirmConsentFullName" ControlToCompare="txtConsentFullName" ErrorMessage="Full names do not match" CssClass="text-danger" />
-
+        
+        <asp:CustomValidator ID="cvCheckFullName" runat="server" ControlToValidate="txtConsentFullName" 
+            OnServerValidate="ValidateFullNameMatch" ErrorMessage="The entered full name must match your first and last name." CssClass="text-danger" />
     </fieldset>
 
     <!-- Submit Button -->
