@@ -307,6 +307,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <None Include="Dockerfile" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
