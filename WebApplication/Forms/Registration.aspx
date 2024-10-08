@@ -40,57 +40,49 @@
             <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
         </asp:DropDownList>
 
+        <br /><br />
 
-        <br /> <br />
-
-        <!-- Level of Study (Required; Dropdown list or radio buttons) -->
-        <asp:Label ID="lblLevelOfStudy" AssociatedControlID="rblLevelOfStudy" Text="Level of Study (Required):" runat="server" />
-        <br />
-        <div>
-             <asp:RadioButtonList ID="rblLevelOfStudy" runat="server" RepeatDirection="Vertical" aria-labelledby="lblLevelOfStudy" RepeatLayout="Flow" >
+        <!-- Level of Study (Required; Radio buttons) -->
+        <fieldset aria-labelledby="lblLevelOfStudy">
+            <legend id="lblLevelOfStudy">Level of Study (Required):</legend>
+            <asp:RadioButtonList ID="rblLevelOfStudy" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow">
                 <asp:ListItem Text="High school graduate" Value="HighSchoolGraduate" />
                 <asp:ListItem Text="Undergraduate" Value="Undergraduate" />
                 <asp:ListItem Text="Graduate" Value="Graduate" />
-             </asp:RadioButtonList>
-
-             <asp:RequiredFieldValidator ID="rfvLevelOfStudy" runat="server" ControlToValidate="rblLevelOfStudy" InitialValue=""  ErrorMessage="Please select a level of study" CssClass="text-danger" />
-        </div>
-       
+            </asp:RadioButtonList>
+            <asp:RequiredFieldValidator ID="rfvLevelOfStudy" runat="server" ControlToValidate="rblLevelOfStudy" InitialValue="" ErrorMessage="Please select a level of study" CssClass="text-danger" />
+        </fieldset>
+      </fieldset>
+        <br />
+      <fieldset>
+        <!-- International Student Status (Required; Radio buttons) -->
+        <fieldset aria-labelledby="lblInternationalStatus">
+            <legend id="lblInternationalStatus">International Student Status (Required):</legend>
+            <asp:RadioButtonList ID="rblInternationalStatus" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow">
+                <asp:ListItem Text="International Student" Value="true" />
+                <asp:ListItem Text="Domestic Student" Value="false" />
+            </asp:RadioButtonList>
+            <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server" ControlToValidate="rblInternationalStatus" InitialValue="" ErrorMessage="Please select your international status." CssClass="text-danger" />
+        </fieldset>
 
         <br />
 
-        <!-- International Student Status (Required; Yes or No; radio buttons) -->
-        <asp:Label Text="International Student Status (Required): " runat="server" />
-        <br />
-        <asp:RadioButtonList ID="rblInternationalStatus" runat="server" RepeatLayout="Flow">
-            <asp:ListItem Text="Yes" Value="true"></asp:ListItem>
-            <asp:ListItem Text="No" Value="false"></asp:ListItem>
-        </asp:RadioButtonList>
-
-        <asp:RequiredFieldValidator ID="rfvInternationalStatus" runat="server"
-            ControlToValidate="rblInternationalStatus"
-            InitialValue=""
-            ErrorMessage="Please select your international status."
-            CssClass="text-danger" />
-
-    </fieldset>
-
-    <fieldset>
-        <legend>Disability Information</legend>
-
-        <!-- Disability Type (Required; Dropdown list as a multi-select or checkbox buttons) -->
-        <asp:CheckBoxList ID="cblDisabilityType" runat="server" RepeatLayout="Flow">
-            <asp:ListItem Text="ADHD" Value="1" />
-            <asp:ListItem Text="Autism" Value="2" />
-            <asp:ListItem Text="Chronic illness" Value="3" />
-            <asp:ListItem Text="Deaf or hard of hearing" Value="4" />
-            <asp:ListItem Text="Learning disability" Value="5" />
-            <asp:ListItem Text="Mental health" Value="6" />
-            <asp:ListItem Text="Neurological" Value="7" />
-            <asp:ListItem Text="Physical or mobility" Value="8" />
-            <asp:ListItem Text="Vision" Value="9" />
-            <asp:ListItem Text="Other" Value="10" />
-        </asp:CheckBoxList>
+        <!-- Disability Information (Required; Checkboxes) -->
+        <fieldset aria-labelledby="lblDisabilityInfo">
+            <legend id="lblDisabilityInfo">Disability Information (Required):</legend>
+            <asp:CheckBoxList ID="cblDisabilityType" runat="server" RepeatLayout="Flow">
+                <asp:ListItem Text="ADHD" Value="1" />
+                <asp:ListItem Text="Autism" Value="2" />
+                <asp:ListItem Text="Chronic illness" Value="3" />
+                <asp:ListItem Text="Deaf or hard of hearing" Value="4" />
+                <asp:ListItem Text="Learning disability" Value="5" />
+                <asp:ListItem Text="Mental health" Value="6" />
+                <asp:ListItem Text="Neurological" Value="7" />
+                <asp:ListItem Text="Physical or mobility" Value="8" />
+                <asp:ListItem Text="Vision" Value="9" />
+                <asp:ListItem Text="Other" Value="10" />
+            </asp:CheckBoxList>
+        </fieldset>
 
 
         <asp:CustomValidator ID="cvDisabilityType" runat="server" 
@@ -106,6 +98,7 @@
         <asp:TextBox ID="txtAccessibilityReq" runat="server" TextMode="MultiLine" Rows="5" CssClass="form-control" />
 
     </fieldset>
+    <br />
 
     <fieldset>
         <legend>Consent</legend>
