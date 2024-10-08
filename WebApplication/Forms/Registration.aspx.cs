@@ -25,7 +25,7 @@ namespace WebApplication.Forms
                 }
             }
         }
-        private void LoadSubmissionData(int submissionId)
+        protected void LoadSubmissionData(int submissionId)
         {
             using (var context = new TechnicalTestDbEntities())
             {
@@ -102,7 +102,7 @@ namespace WebApplication.Forms
             }
         }
 
-        private void PopulateSubmissionData(FormSubmission submission, TechnicalTestDbEntities context)
+        protected void PopulateSubmissionData(FormSubmission submission, TechnicalTestDbEntities context)
         {
             // Populate form submission data
             submission.FirstName = txtFirstName.Text.Trim();
@@ -129,7 +129,7 @@ namespace WebApplication.Forms
             }
         }
 
-        private bool IsConsentValid()
+        protected bool IsConsentValid()
         {
             string firstName = txtFirstName.Text.Trim();
             string lastName = txtLastName.Text.Trim();
