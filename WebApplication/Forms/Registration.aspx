@@ -129,17 +129,17 @@
     <script type="text/javascript">
         <script type="text/javascript">
             function focusValidationSummary() {
-        var validationSummary = document.getElementById('<%= ValidationSummary1.ClientID %>');
-        if (validationSummary && validationSummary.innerHTML.trim() !== "") {
-            validationSummary.setAttribute("tabindex", "-1");
-        validationSummary.focus();
+            var validationSummary = document.getElementById('<%= ValidationSummary1.ClientID %>');
+            if (validationSummary && validationSummary.innerHTML.trim() !== "") {
+                validationSummary.setAttribute("tabindex", "-1");
+            validationSummary.focus();
 
-        validationSummary.setAttribute("aria-live", "off");
-        setTimeout(function() {
-            validationSummary.setAttribute("aria-live", "assertive");
-            }, 100);  
+            validationSummary.setAttribute("aria-live", "off");
+            setTimeout(function() {
+                validationSummary.setAttribute("aria-live", "assertive");
+                }, 100);  
+            }
         }
-    }
     </script>
 
 
